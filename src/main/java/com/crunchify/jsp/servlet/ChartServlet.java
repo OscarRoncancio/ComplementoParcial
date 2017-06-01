@@ -7,6 +7,9 @@ package com.crunchify.jsp.servlet;
 
 import edu.co.sergio.mundo.dao.DepartamentoDAO;
 import edu.co.sergio.mundo.vo.Departamento;
+import edu.co.sergio.mundo.vo.colmena;
+import edu.co.sergio.mundo.vo.recoleccion;
+import edu.co.sergio.mundo.vo.visitaRecoleccion;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.io.IOException;
@@ -50,6 +53,7 @@ public class ChartServlet extends HttpServlet {
         DepartamentoDAO d = new DepartamentoDAO();
         
         ArrayList<Departamento> depto = (ArrayList<Departamento>) d.findAll();
+        
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for (int i = 0; i < depto.size(); i++) {
             dataset.setValue(depto.get(i).getId_departamento(), depto.get(i).getNom_departamento(), "hhhhh");

@@ -98,6 +98,7 @@ public class DepartamentoDAO implements IBaseDatos<Departamento> {
 	    
 	    return departamentos;
 	}
+        
 
 	
 	/**

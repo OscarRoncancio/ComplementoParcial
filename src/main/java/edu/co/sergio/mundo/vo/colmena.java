@@ -20,6 +20,15 @@ public class colmena {
     private int PanalesConAlimento;
     private int PanalesConCria;
     private int PanalesVacios;
+    private int kilosMiel;
+
+    public int getKilosMiel() {
+        return kilosMiel;
+    }
+
+    public void setKilosMiel(int kilosMiel) {
+        this.kilosMiel = kilosMiel;
+    }
 
     public int getId_colmena() {
         return id_colmena;

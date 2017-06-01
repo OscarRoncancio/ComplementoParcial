@@ -94,6 +94,6 @@
             <url>http://download.java.net/maven/glassfish</url>
         </pluginRepository>
     </pluginRepositories>
-    <name>ParcialBases</name>
+    <name>ComplementoParcial</name>
 </project>
 

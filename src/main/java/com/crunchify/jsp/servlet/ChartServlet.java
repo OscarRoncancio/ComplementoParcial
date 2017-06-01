@@ -5,11 +5,9 @@
  */
 package com.crunchify.jsp.servlet;
 
-import edu.co.sergio.mundo.dao.DepartamentoDAO;
+import edu.co.sergio.mundo.dao.ColmenaDAO;
 import edu.co.sergio.mundo.vo.Departamento;
 import edu.co.sergio.mundo.vo.colmena;
-import edu.co.sergio.mundo.vo.recoleccion;
-import edu.co.sergio.mundo.vo.visitaRecoleccion;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.io.IOException;
@@ -50,13 +48,13 @@ public class ChartServlet extends HttpServlet {
     }
 
     public JFreeChart getChart() {
-        DepartamentoDAO d = new DepartamentoDAO();
+        ColmenaDAO d = new ColmenaDAO();
         
-        ArrayList<Departamento> depto = (ArrayList<Departamento>) d.findAll();
+        ArrayList<colmena> col = (ArrayList<colmena>) d.findAll();
         
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        for (int i = 0; i < depto.size(); i++) {
-            dataset.setValue(depto.get(i).getId_departamento(), depto.get(i).getNom_departamento(), "hhhhh");
+        for (int i = 0; i < col.size(); i++) {
+            dataset.setValue(col.get(i).getKilosMiel(), "colmena "+col.get(i).getId_colmena(), "mmmmm");
         }
         JFreeChart chart = ChartFactory.createBarChart3D(
                 "3D Bar Chart Demo", // chart title

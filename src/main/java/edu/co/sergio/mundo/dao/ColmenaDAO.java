@@ -38,7 +38,7 @@ public class ColmenaDAO implements IBaseDatos<colmena> {
      */
     public List<colmena> findAll() {
         List<colmena> obras = null;
-        String query = "Select PanalesConAlimento from Colmena where id_colmena = 1";
+        String query = "Select panales_con_alimento from Colmena where id_colmena = 1";
         Connection connection = null;
         try {
             connection = Conexion.getConnection();
@@ -69,7 +69,7 @@ public class ColmenaDAO implements IBaseDatos<colmena> {
         return obras;
     }
      public List<colmena> consultaGrafico2() {
-        List<colmena> departamentos = null;
+        List<colmena> col = null;
         String query = "SELECT sum(kilosMiel) as suma FROM Recoleccion group by id_colmena";
         Connection connection = null;
         try {
@@ -82,8 +82,8 @@ public class ColmenaDAO implements IBaseDatos<colmena> {
             ResultSet rs = st.executeQuery(query);
 
             while (rs.next()) {
-                if (departamentos == null) {
-                    departamentos = new ArrayList<colmena>();
+                if (col == null) {
+                    col = new ArrayList<colmena>();
                 }
 
                 colmena registro = new colmena();
@@ -91,7 +91,7 @@ public class ColmenaDAO implements IBaseDatos<colmena> {
                 int valor = rs.getInt("suma");
                 registro.setKilosMiel(valor);
 
-                departamentos.add(registro);
+                col.add(registro);
             }
             st.close();
 
@@ -100,7 +100,7 @@ public class ColmenaDAO implements IBaseDatos<colmena> {
             e.printStackTrace();
         }
 
-        return departamentos;
+        return col;
     }
 
     /**

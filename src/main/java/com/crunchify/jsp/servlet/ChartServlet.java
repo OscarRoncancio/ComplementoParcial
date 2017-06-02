@@ -30,6 +30,7 @@ import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.renderer.category.CategoryItemRenderer;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
 
@@ -44,6 +45,14 @@ public class ChartServlet extends HttpServlet {
         int width = 500;
         int height = 350;
         ChartUtilities.writeChartAsPNG(outputStream, chart, width, height);
+        
+        
+        response.setContentType("image/png");
+        OutputStream outputStream2 = response.getOutputStream();
+        JFreeChart chart2 = getChart2();
+        int width2 = 500;
+        int height2 = 350;
+        ChartUtilities.writeChartAsPNG(outputStream2, chart2, width2, height2);
 
     }
 
@@ -54,7 +63,7 @@ public class ChartServlet extends HttpServlet {
         
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for (int i = 0; i < col.size(); i++) {
-            dataset.setValue(col.get(i).getKilosMiel(), "colmena "+col.get(i).getId_colmena(), "mmmmm");
+            dataset.setValue(col.get(i).getKilosMiel(), "colmena "+col.get(i).getId_colmena()+1, "Kilos colmena"+col.get(i).getId_colmena()+1);
         }
         JFreeChart chart = ChartFactory.createBarChart3D(
                 "3D Bar Chart Demo", // chart title
@@ -79,6 +88,35 @@ public class ChartServlet extends HttpServlet {
         r.setMaximumBarWidth(0.05);
         return chart;
 
+    }
+    
+    public JFreeChart getChart2() {
+        ColmenaDAO d = new ColmenaDAO();
+        //Crear la capa de servicios que se enlace con el DAO
+        ArrayList<colmena> col = (ArrayList<colmena>) d.findAll();
+        DefaultPieDataset dataset = new DefaultPieDataset();
+
+        for (int i = 0; i < col.size(); i++) {
+            double porcentaje = (col.get(i).getPanalesConAlimento()/ 10) * 100;
+            dataset.setValue("colmena 1", porcentaje);
+            dataset.setValue("otros", 100 - porcentaje);
+
+        }
+
+        boolean legend = true;
+        boolean tooltips = false;
+        boolean urls = false;
+
+        JFreeChart chart = ChartFactory.createPieChart("Obras", dataset, legend, tooltips, urls);
+
+        chart.setBorderPaint(Color.GREEN);
+
+        chart.setBorderStroke(
+                new BasicStroke(5.0f));
+        chart.setBorderVisible(
+                true);
+
+        return chart;
     }
 
 }

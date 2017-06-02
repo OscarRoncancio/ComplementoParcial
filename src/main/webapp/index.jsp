@@ -33,8 +33,8 @@ body {
       
     
     %>
-    <img src="ChartServlet" /><br/>
-    <img src="chartServletPastel" /><br/>
+    <img src="ChartServlet" />
+    <img src="chartServletPastel" /><br><br>
     
     
 </body>

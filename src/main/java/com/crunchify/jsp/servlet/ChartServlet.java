@@ -35,8 +35,7 @@ import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
 
 public class ChartServlet extends HttpServlet {
-  
-    
+
     //
     private static final long serialVersionUID = 1L;
 
@@ -47,19 +46,17 @@ public class ChartServlet extends HttpServlet {
         int width = 500;
         int height = 350;
         ChartUtilities.writeChartAsPNG(outputStream, chart, width, height);
-        
-        
 
     }
 
     public JFreeChart getChart() {
         ColmenaDAO d = new ColmenaDAO();
-        
+
         ArrayList<colmena> col = (ArrayList<colmena>) d.consultaGrafico2();
-        
+
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for (int i = 0; i < col.size(); i++) {
-            dataset.setValue(col.get(i).getKilosMiel(), "colmena "+col.get(i).getId_colmena()+1, "Kilos colmena "+col.get(i).getId_colmena()+1);
+            dataset.setValue(col.get(i).getKilosMiel(), "colmena " + col.get(i).getId_colmena() + 1, "Kilos colmena " + col.get(i).getId_colmena() + 1);
         }
         JFreeChart chart = ChartFactory.createBarChart3D(
                 "3D Bar Chart Demo", // chart title
@@ -83,10 +80,5 @@ public class ChartServlet extends HttpServlet {
         BarRenderer r = (BarRenderer) renderer;
         r.setMaximumBarWidth(0.05);
         return chart;
-}
-
     }
-    
-    
-
-
+}

@@ -39,9 +39,9 @@ public class ChartServlet2 extends HttpServlet {
     }
 
     public JFreeChart getChart() {
-        ColmenaDAO dAO = new ColmenaDAO();
+        ColmenaDAO d = new ColmenaDAO();
         //Crear la capa de servicios que se enlace con el DAO
-        ArrayList<colmena> col = (ArrayList<colmena>) dAO.findAll();
+        ArrayList<colmena> col = (ArrayList<colmena>) d.consultaGrafico1();
         DefaultPieDataset dataset = new DefaultPieDataset();
 
         for (int i = 0; i < col.size(); i++) {

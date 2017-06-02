@@ -18,8 +18,8 @@ body {
 </head>
 <body>
 
-    <img src="ChartServlet2" />
-    <img src="ChartServlet" /><br><br>
+    <img src="ChartServlet" />
+    <img src="ChartServlet2" /><br><br>
     
     
 </body>

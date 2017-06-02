@@ -58,8 +58,8 @@ public class chartServletPastel extends HttpServlet{
 
         for (int i = 0; i < col.size(); i++) {
             double porcentaje = (col.get(i).getPanalesConAlimento()/ 10) * 100;
-            dataset.setValue("colmena 1", porcentaje);
-            dataset.setValue("otros", 100 - porcentaje);
+            dataset.setValue("colmena 1", 30);
+            dataset.setValue("otros", 70);
 
         }
 

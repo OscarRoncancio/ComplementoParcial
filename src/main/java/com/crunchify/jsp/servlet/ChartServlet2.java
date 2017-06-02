@@ -5,6 +5,8 @@
  */
 package com.crunchify.jsp.servlet;
 
+
+
 import edu.co.sergio.mundo.dao.ColmenaDAO;
 import edu.co.sergio.mundo.vo.colmena;
 import java.awt.BasicStroke;
@@ -33,9 +35,7 @@ public class ChartServlet2 extends HttpServlet {
         int width = 500;
         int height = 350;
         ChartUtilities.writeChartAsPNG(outputStream, chart, width, height);
-        
-        
-        
+
     }
 
     public JFreeChart getChart() {

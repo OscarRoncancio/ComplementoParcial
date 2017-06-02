@@ -70,7 +70,7 @@ public class ColmenaDAO implements IBaseDatos<colmena> {
     }
      public List<colmena> consultaGrafico2() {
         List<colmena> departamentos = null;
-        String query = "SELECT sum(kilosMiel) as suma FROM Recolector group by id_colmena";
+        String query = "SELECT sum(kilosMiel) as suma FROM Recoleccion group by id_colmena";
         Connection connection = null;
         try {
             connection = Conexion.getConnection();

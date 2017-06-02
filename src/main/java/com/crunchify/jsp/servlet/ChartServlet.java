@@ -6,7 +6,7 @@
 package com.crunchify.jsp.servlet;
 
 import edu.co.sergio.mundo.dao.ColmenaDAO;
-import edu.co.sergio.mundo.vo.Departamento;
+
 import edu.co.sergio.mundo.vo.colmena;
 import java.awt.BasicStroke;
 import java.awt.Color;

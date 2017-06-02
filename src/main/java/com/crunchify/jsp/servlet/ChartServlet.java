@@ -53,7 +53,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
     public JFreeChart getChart() {
         ColmenaDAO dAO = new ColmenaDAO();
         //Crear la capa de servicios que se enlace con el DAO
-        ArrayList<colmena> col = (ArrayList<colmena>) dAO.findAll();
+        ArrayList<colmena> col = (ArrayList<colmena>) dAO.consultaGrafico2();
         DefaultPieDataset dataset = new DefaultPieDataset();
 
         for (int i = 0; i < col.size(); i++) {

@@ -17,24 +17,9 @@ body {
 <title>Crunchify JSP Servlet Example</title>
 </head>
 <body>
-    <div align="center" style="margin-top: 50px;">
 
-     </div>
- 
-    <%
-       if( request.getAttribute("departamentos")!=null){
-          List<Departamento> departamentos  = (List<Departamento>)request.getAttribute("departamentos");
-           for (Departamento departamento : departamentos) {
-         %>      
-         <h1> <%=departamento.getNom_departamento()%> </h1><br/> 
-         <%      
-          }
-       }
-      
-    
-    %>
-    <img src="ChartServlet" />
-    <img src="ChartServlet2" /><br><br>
+    <img src="ChartServlet2" />
+    <img src="ChartServlet" /><br><br>
     
     
 </body>

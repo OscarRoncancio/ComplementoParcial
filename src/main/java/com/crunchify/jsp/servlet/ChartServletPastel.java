@@ -5,8 +5,6 @@
  */
 package com.crunchify.jsp.servlet;
 
-
-
 import edu.co.sergio.mundo.dao.ColmenaDAO;
 import edu.co.sergio.mundo.vo.colmena;
 import java.awt.BasicStroke;
@@ -22,18 +20,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.axis.CategoryAxis;
-import org.jfree.chart.axis.CategoryLabelPositions;
-import org.jfree.chart.plot.CategoryPlot;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.renderer.category.BarRenderer;
-import org.jfree.chart.renderer.category.CategoryItemRenderer;
-import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
+
 
 public class ChartServletPastel extends HttpServlet {
 
-        private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("image/png");
@@ -42,42 +34,36 @@ public class ChartServletPastel extends HttpServlet {
         int width = 500;
         int height = 350;
         ChartUtilities.writeChartAsPNG(outputStream, chart, width, height);
-        
-        
 
     }
 
     public JFreeChart getChart() {
         ColmenaDAO d = new ColmenaDAO();
-        
-        ArrayList<colmena> col = (ArrayList<colmena>) d.consultaGrafico2();
-        
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        //Crear la capa de servicios que se enlace con el DAO
+        ArrayList<colmena> col = (ArrayList<colmena>) d.findAll();
+        DefaultPieDataset dataset = new DefaultPieDataset();
+
         for (int i = 0; i < col.size(); i++) {
-            dataset.setValue(col.get(i).getKilosMiel(), "colmena "+col.get(i).getId_colmena()+1, "Kilos colmena "+col.get(i).getId_colmena()+1);
+            double porcentaje = (col.get(i).getPanalesConAlimento() / 10) * 100;
+            dataset.setValue("colmena 1", porcentaje);
+            dataset.setValue("otros", 100 - porcentaje);
+
         }
-        JFreeChart chart = ChartFactory.createBarChart3D(
-                "3D Bar Chart Demo", // chart title
-                "Category", // domain axis label
-                "Value", // range axis label
-                dataset, // data
-                PlotOrientation.VERTICAL, // orientation
-                true, // include legend
-                true, // tooltips
-                false // urls
-        );
 
-        CategoryPlot plot = chart.getCategoryPlot();
-        CategoryAxis axis = plot.getDomainAxis();
-        axis.setCategoryLabelPositions(
-                CategoryLabelPositions.createUpRotationLabelPositions(Math.PI / 8.0)
-        );
+        boolean legend = true;
+        boolean tooltips = false;
+        boolean urls = false;
 
-        CategoryItemRenderer renderer = plot.getRenderer();
-        renderer.setItemLabelsVisible(true);
-        BarRenderer r = (BarRenderer) renderer;
-        r.setMaximumBarWidth(0.05);
+        JFreeChart chart = ChartFactory.createPieChart("col", dataset, legend, tooltips, urls);
+
+        chart.setBorderPaint(Color.GREEN);
+
+        chart.setBorderStroke(
+                new BasicStroke(5.0f));
+        chart.setBorderVisible(
+                true);
+
         return chart;
-}
+    }
 
 }

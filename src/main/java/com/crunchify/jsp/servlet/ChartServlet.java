@@ -50,7 +50,7 @@ public class ChartServlet extends HttpServlet {
     public JFreeChart getChart() {
         ColmenaDAO d = new ColmenaDAO();
         
-        ArrayList<colmena> col = (ArrayList<colmena>) d.findAll();
+        ArrayList<colmena> col = (ArrayList<colmena>) d.consultaGrafico2();
         
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for (int i = 0; i < col.size(); i++) {

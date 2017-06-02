@@ -38,7 +38,7 @@ public class ColmenaDAO implements IBaseDatos<colmena> {
      */
     public List<colmena> findAll() {
         List<colmena> obras = null;
-        String query = "Select panales_con_alimento from Colmena where id_colmena = 1";
+        String query = "Select PanalesConAlimento from colmena where id_colmena = 1";
         Connection connection = null;
         try {
             connection = Conexion.getConnection();
@@ -68,6 +68,39 @@ public class ColmenaDAO implements IBaseDatos<colmena> {
 
         return obras;
     }
+    public List<colmena> consultaGrafico1() {
+        List<colmena> col = null;
+        String query = "Select PanalesConAlimento from colmena where id_colmena = 1";
+        Connection connection = null;
+        try {
+            connection = Conexion.getConnection();
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(ColmenaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            
+
+            while (rs.next()) {
+                if (col == null) {
+                    col = new ArrayList<colmena>();
+                }
+                colmena registro = new colmena();
+                int valor = rs.getInt("PanalesConAlimento");
+                registro.setPanalesConAlimento(valor);
+                col.add(registro);
+            }
+            st.close();
+
+        } catch (SQLException e) {
+            System.out.println("Problemas al obtener la lista de Departamentos");
+            e.printStackTrace();
+        }
+
+        return col;
+    }
+    
      public List<colmena> consultaGrafico2() {
         List<colmena> col = null;
         String query = "SELECT sum(kilosMiel) as suma FROM Recoleccion group by id_colmena";

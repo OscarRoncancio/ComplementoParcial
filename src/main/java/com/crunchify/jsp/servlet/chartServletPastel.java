@@ -46,20 +46,21 @@ public class chartServletPastel extends HttpServlet{
         int width = 500;
         int height = 350;
         ChartUtilities.writeChartAsPNG(outputStream, chart, width, height);
-       
+        
+        
+        
     }
 
-
-    
     public JFreeChart getChart() {
-        ColmenaDAO d = new ColmenaDAO();
-        ArrayList<colmena> col = (ArrayList<colmena>) d.findAll();
+        ColmenaDAO dAO = new ColmenaDAO();
+        //Crear la capa de servicios que se enlace con el DAO
+        ArrayList<colmena> col = (ArrayList<colmena>) dAO.findAll();
         DefaultPieDataset dataset = new DefaultPieDataset();
 
         for (int i = 0; i < col.size(); i++) {
             double porcentaje = (col.get(i).getPanalesConAlimento()/ 10) * 100;
-            dataset.setValue("colmena 1", 30);
-            dataset.setValue("otros", 70);
+            dataset.setValue("colmena 1", porcentaje);
+            dataset.setValue("otros", 100 - porcentaje);
 
         }
 
@@ -67,7 +68,7 @@ public class chartServletPastel extends HttpServlet{
         boolean tooltips = false;
         boolean urls = false;
 
-        JFreeChart chart = ChartFactory.createPieChart("col", dataset, legend, tooltips, urls);
+        JFreeChart chart = ChartFactory.createPieChart("Obras", dataset, legend, tooltips, urls);
 
         chart.setBorderPaint(Color.GREEN);
 

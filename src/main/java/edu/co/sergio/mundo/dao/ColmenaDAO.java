@@ -70,7 +70,7 @@ public class ColmenaDAO implements IBaseDatos<colmena> {
     }
     public List<colmena> consultaGrafico1() {
         List<colmena> col = null;
-        String query = "Select PanalesConAlimento from colmena where id_colmena = 1";
+        String query = "Select PanalesConAlimento from Colmena where id_colmena = 1";
         Connection connection = null;
         try {
             connection = Conexion.getConnection();
